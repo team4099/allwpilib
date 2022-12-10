@@ -203,7 +203,7 @@ foreach(example ${wpinet_examples})
 endforeach()
 
 if (UNIX AND NOT APPLE)
-    set (LIBUTIL -lutil)
+    set (LIBUTIL)
 else()
     set (LIBUTIL)
 endif()
