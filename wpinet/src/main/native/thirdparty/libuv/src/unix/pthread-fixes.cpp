@@ -41,11 +41,11 @@ int uv__pthread_sigmask(int how, const sigset_t* set, sigset_t* oset) {
   int err;
 
   if (uv__load_relaxed(&workaround)) {
-    return sigprocmask(how, set, oset);
+    return pthread_sigmask(how, set, oset);
   } else {
     err = pthread_sigmask(how, set, oset);
     if (err) {
-      if (err == EINVAL && sigprocmask(how, set, oset) == 0) {
+      if (err == EINVAL && pthread_sigmask(how, set, oset) == 0) {
         uv__store_relaxed(&workaround, 1);
         return 0;
       } else {

@@ -219,7 +219,7 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
       timeout = max_safe_timeout;
 
     if (sigmask != 0 && no_epoll_pwait != 0)
-      if (sigprocmask(SIG_BLOCK, &sigset, NULL))
+      if (pthread_sigmask(SIG_BLOCK, &sigset, NULL))
         abort();
 
     if (no_epoll_wait != 0 || (sigmask != 0 && no_epoll_pwait == 0)) {
@@ -244,7 +244,7 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
     }
 
     if (sigmask != 0 && no_epoll_pwait != 0)
-      if (sigprocmask(SIG_UNBLOCK, &sigset, NULL))
+      if (pthread_sigmask(SIG_UNBLOCK, &sigset, NULL))
         abort();
 
     /* Update loop->time unconditionally. It's tempting to skip the update when

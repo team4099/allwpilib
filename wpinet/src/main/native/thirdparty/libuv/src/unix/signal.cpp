@@ -145,7 +145,7 @@ static void uv__signal_block_and_lock(sigset_t* saved_sigmask) {
 
   /* to shut up valgrind */
   sigemptyset(saved_sigmask);
-  if (sigprocmask(SIG_SETMASK, &new_mask, saved_sigmask))
+  if (pthread_sigmask(SIG_SETMASK, &new_mask, saved_sigmask))
     abort();
 
   if (uv__signal_lock())
@@ -157,7 +157,7 @@ static void uv__signal_unlock_and_unblock(sigset_t* saved_sigmask) {
   if (uv__signal_unlock())
     abort();
 
-  if (sigprocmask(SIG_SETMASK, saved_sigmask, NULL))
+  if (pthread_sigmask(SIG_SETMASK, saved_sigmask, NULL))
     abort();
 }
 

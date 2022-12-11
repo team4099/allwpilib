@@ -373,7 +373,7 @@ static void uv__process_child_init(const uv_process_options_t* options,
 
   /* Reset signal mask just before exec. */
   sigemptyset(&signewset);
-  if (sigprocmask(SIG_SETMASK, &signewset, NULL) != 0)
+  if (pthread_sigmask(SIG_SETMASK, &signewset, NULL) != 0)
     abort();
 
 #ifdef __MVS__
@@ -805,7 +805,7 @@ static int uv__spawn_and_init_child_fork(const uv_process_options_t* options,
   sigdelset(&signewset, SIGILL);
   sigdelset(&signewset, SIGSYS);
   sigdelset(&signewset, SIGABRT);
-  if (sigprocmask(SIG_BLOCK, &signewset, &sigoldset) != 0)
+  if (pthread_sigmask(SIG_BLOCK, &signewset, &sigoldset) != 0)
     abort();
 
   *pid = fork();
@@ -816,7 +816,7 @@ static int uv__spawn_and_init_child_fork(const uv_process_options_t* options,
     abort();
   }
 
-  if (sigprocmask(SIG_SETMASK, &sigoldset, NULL) != 0)
+  if (pthread_sigmask(SIG_SETMASK, &sigoldset, NULL) != 0)
     abort();
 
   if (*pid == -1)
