@@ -5,7 +5,7 @@
 #include "frc/geometry/Rotation3d.h"
 
 #include <cmath>
-#include <numbers>
+#include <math.h>
 
 #include <wpi/json.h>
 
@@ -198,7 +198,7 @@ units::radian_t Rotation3d::Y() const {
   // https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles#Quaternion_to_Euler_angles_conversion
   double ratio = 2.0 * (w * y - z * x);
   if (std::abs(ratio) >= 1.0) {
-    return units::radian_t{std::copysign(std::numbers::pi / 2.0, ratio)};
+    return units::radian_t{std::copysign(3.141592653589793238462643383279502 / 2.0, ratio)};
   } else {
     return units::radian_t{std::asin(ratio)};
   }

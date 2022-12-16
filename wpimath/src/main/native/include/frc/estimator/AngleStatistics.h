@@ -4,8 +4,6 @@
 
 #pragma once
 
-#include <numbers>
-
 #include "frc/EigenCore.h"
 #include "frc/MathUtil.h"
 
@@ -58,7 +56,7 @@ Vectord<States> AngleAdd(const Vectord<States>& a, const Vectord<States>& b,
                          int angleStateIdx) {
   Vectord<States> ret = a + b;
   ret[angleStateIdx] =
-      InputModulus(ret[angleStateIdx], -std::numbers::pi, std::numbers::pi);
+      InputModulus(ret[angleStateIdx], -3.141592653589793238462643383279502, 3.141592653589793238462643383279502);
   return ret;
 }
 
