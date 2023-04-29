@@ -15,7 +15,7 @@ public class PubSubOption {
     disableRemote,
     disableLocal,
     excludePublisher,
-    excludeSelf;
+    excludeSelf
   }
 
   PubSubOption(Kind kind, boolean value) {
@@ -107,7 +107,7 @@ public class PubSubOption {
 
   /**
    * For subscriptions, specify whether local value updates should not be queued for readQueue().
-   * See alse disableRemote(). Defaults to false (local value updates are queued).
+   * See also disableRemote(). Defaults to false (local value updates are queued).
    *
    * @param disabled True to disable, false to enable
    * @return option
